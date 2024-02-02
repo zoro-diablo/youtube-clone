@@ -23,6 +23,7 @@ const SearchBar = () => {
       onSubmit={onhandleSubmit}
       sx={{
         backgroundColor: '#131213',
+        display: 'flex',
         borderRadius: 20,
         border: '1px solid #e3e3e3',
         pl: 2,
