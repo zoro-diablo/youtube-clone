@@ -101,3 +101,15 @@ a {
     width:200px;
   }
 }
+@media screen and (max-width: 450px) {
+  .scroll-horizontal {
+    overflow: auto !important;
+  }
+
+  .react-player {
+    height: 45vh !important;
+  }
+  .search-bar{
+    width:150px;
+  }
+}
