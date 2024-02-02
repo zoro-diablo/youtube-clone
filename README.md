@@ -1,8 +1,20 @@
-# React + Vite
+# Vite + React Query + Rapid Api
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site Link : https://youtube-vanced.netlify.app 
 
-Currently, two official plugins are available:
+## Home Page
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[![image.png](https://i.postimg.cc/x1Fpz2f6/image.png)](https://postimg.cc/FY3VMwJS)
+
+## Video
+
+[![image.png](https://i.postimg.cc/R0wfzk0P/image.png)](https://postimg.cc/5HNjBkLv)
+
+## Search Bar
+
+[![image.png](https://i.postimg.cc/sfknPrhX/image.png)](https://postimg.cc/t7zty8DQ)
+
+## Channel
+
+[![image.png](https://i.postimg.cc/d0FP5CZh/image.png)](https://postimg.cc/QFfytHbD)
+
