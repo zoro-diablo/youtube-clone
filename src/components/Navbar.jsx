@@ -19,7 +19,7 @@ const Navbar = () => {
       <div style={{ display: 'flex' }}>
         <Link
           to='/'
-          style={{ display: 'flex', alignItems: 'center', marginLeft: '15px' }}
+          style={{ display: 'flex', alignItems: 'center',  }}
         >
           <img src='/logo-2.png' alt='logo' width={150} />
         </Link>
