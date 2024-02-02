@@ -1,31 +1,37 @@
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { useQuery } from 'react-query';
 import { fetchFromApi } from '../utils/fetchFromApi';
-import { useEffect, useState } from 'react';
 import ChannelCard from '../components/ChannelCard';
 import Videos from '../components/Videos';
+import Loader from '../components/Loader';
+import ErrorPage from '../components/ErrorPage';
 
 const ChannelDetail = () => {
-  const [channelDetail, setChannelDetail] = useState();
-  const [videos, setVideos] = useState(null);
-
   const { id } = useParams();
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      const data = await fetchFromApi(`channels?part=snippet&id=${id}`);
+  const {
+    data: channelDetail,
+    isLoading: channelLoading,
+    isError: channelError,
+  } = useQuery(['channel', id], async () => {
+    const data = await fetchFromApi(`channels?part=snippet&id=${id}`);
+    return data?.items[0];
+  });
 
-      setChannelDetail(data?.items[0]);
+  const {
+    data: videos,
+    isLoading: videosLoading,
+    isError: videosError,
+  } = useQuery(['videos', id], async () => {
+    const videosData = await fetchFromApi(
+      `search?channelId=${id}&part=snippet%2Cid&order=date`
+    );
+    return videosData?.items;
+  });
 
-      const videosData = await fetchFromApi(
-        `search?channelId=${id}&part=snippet%2Cid&order=date`
-      );
-
-      setVideos(videosData?.items);
-    };
-
-    fetchResults();
-  }, [id]);
+  if (channelLoading || videosLoading) return <Loader />;
+  if (channelError || videosError) return <ErrorPage />;
 
   return (
     <Box minHeight='95vh'>

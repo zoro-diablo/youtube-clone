@@ -6,6 +6,7 @@ import Videos from '../components/Videos';
 import Loader from '../components/Loader';
 import { useQuery } from 'react-query';
 import { fetchFromApi } from '../utils/fetchFromApi';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const VideoDetail = () => {
   const { id } = useParams();
@@ -46,7 +47,7 @@ const VideoDetail = () => {
               px={2}
             >
               <Link to={`/channel/${channelId}`}>
-                <Typography
+                <Typography sx={{ color: '#fff' }}
                   variant={window.innerWidth <= 600 ? 'subtitle1' : 'h6'}
                 >
                   {channelTitle}
@@ -59,7 +60,8 @@ const VideoDetail = () => {
                 <Typography variant='body1' sx={{ opacity: 0.7 }}>
                   {parseInt(viewCount).toLocaleString()} views
                 </Typography>
-                <Typography variant='body1' sx={{ opacity: 0.7 }}>
+                <Typography variant='body1' sx={{ opacity: 0.7, display:'flex',alignItems:'center',gap:'5px' }}>
+                  <ThumbUpIcon sx={{width:'20px'}} />
                   {parseInt(likeCount).toLocaleString()} likes
                 </Typography>
               </Stack>
