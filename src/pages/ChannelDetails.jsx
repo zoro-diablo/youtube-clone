@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
-
 import { fetchFromApi } from '../utils/fetchFromApi';
 import { useEffect, useState } from 'react';
 import ChannelCard from '../components/ChannelCard';

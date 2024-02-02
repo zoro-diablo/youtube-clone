@@ -34,6 +34,13 @@ a {
   color: white !important;
 }
 
+.error-pic{
+  display: flex;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .react-player {
   height: 77vh !important;
   width: 100% !important;
@@ -43,6 +50,9 @@ a {
   border:none;
   outline:none;
   width:250px;
+  background-color: #131213;
+  color: white;
+  font-size: 15px;
 }
 
 .category-btn{

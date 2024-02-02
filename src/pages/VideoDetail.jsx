@@ -1,29 +1,24 @@
-import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { Typography, Box, Stack } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
 import Videos from '../components/Videos';
 import Loader from '../components/Loader';
+import { useQuery } from 'react-query';
 import { fetchFromApi } from '../utils/fetchFromApi';
 
 const VideoDetail = () => {
-  const [videoDetail, setVideoDetail] = useState(null);
-  const [videos, setVideos] = useState(null);
   const { id } = useParams();
 
-  useEffect(() => {
-    fetchFromApi(`videos?part=snippet,statistics&id=${id}`).then((data) =>
-      setVideoDetail(data.items[0])
-    );
+  const { data: videoDetail, isLoading: videoDetailLoading } = useQuery(['videoDetail', id], () =>
+    fetchFromApi(`videos?part=snippet,statistics&id=${id}`).then((data) => data.items[0])
+  );
 
-    fetchFromApi(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
-      (data) => setVideos(data.items)
-    );
-  }, [id]);
+  const { data: relatedVideos, isLoading: relatedVideosLoading } = useQuery(['relatedVideos', id], () =>
+    fetchFromApi(`search?part=snippet&relatedToVideoId=${id}&type=video`).then((data) => data.items)
+  );
 
-  if (!videoDetail?.snippet) return <Loader />;
+  if (videoDetailLoading || !videoDetail || !videoDetail.snippet) return <Loader />;
 
   const {
     snippet: { title, channelId, channelTitle },
@@ -51,9 +46,9 @@ const VideoDetail = () => {
               px={2}
             >
               <Link to={`/channel/${channelId}`}>
-              <Typography
-  variant={window.innerWidth <= 600 ? 'subtitle1' : 'h6'}
->
+                <Typography
+                  variant={window.innerWidth <= 600 ? 'subtitle1' : 'h6'}
+                >
                   {channelTitle}
                   <CheckCircleIcon
                     sx={{ fontSize: '12px', color: 'gray', ml: '5px' }}
@@ -71,14 +66,14 @@ const VideoDetail = () => {
             </Stack>
           </Box>
         </Box>
-        {videos && videos.length > 0 && (
+        {!relatedVideosLoading && relatedVideos && relatedVideos.length > 0 && (
           <Box
             px={2}
             py={{ md: 1, xs: 5 }}
             justifyContent='center'
             alignItems='center'
           >
-            <Videos videos={videos} direction='column' />
+            <Videos videos={relatedVideos} direction='column' />
           </Box>
         )}
       </Stack>
